@@ -1,0 +1,67 @@
+<?php session_start();
+  include_once '../include.inc.php';
+
+$_conexao = new Conexao();
+
+$_cliente = new Cliente();
+
+$_dataClass = new DataMysql();
+
+      $_enviar        = isset($_POST['btn_enviar'])        ? true                        : "";
+      $_id_cliente    = isset($_POST['id_cliente'])        ? $_POST['id_cliente']        : "";
+      $_cpf           = isset($_POST['txt_cpf'])           ? $_POST['txt_cpf']           : "";
+      $_cnpj          = isset($_POST['txt_cnpj'])          ? $_POST['txt_cnpj']          : "";
+      $_nome          = isset($_POST['txt_nome'])          ? $_POST['txt_nome']          : "";
+      $_ci            = isset($_POST['txt_ci'])            ? $_POST['txt_ci']            : "";
+      $_endereco      = isset($_POST['txt_endereco'])      ? $_POST['txt_endereco']      : "";
+      $_bairro        = isset($_POST['txt_bairro'])        ? $_POST['txt_bairro']        : "";
+      $_cidade        = isset($_POST['txt_cidade'])        ? $_POST['txt_cidade']        : "";
+      $_estado        = isset($_POST['txt_estado'])        ? $_POST['txt_estado']        : "";
+      $_cep           = isset($_POST['txt_cep'])           ? $_POST['txt_cep']           : "";
+      $_responsavel   = isset($_POST['txt_responsavel'])   ? $_POST['txt_responsavel']   : "";
+      $_tel1          = isset($_POST['txt_tel1'])          ? $_POST['txt_tel1']          : "";
+      $_tel2          = isset($_POST['txt_tel2'])          ? $_POST['txt_tel2']          : "";
+      $_tel3          = isset($_POST['txt_tel3'])          ? $_POST['txt_tel3']          : "";
+      $_dt_nascimento = isset($_POST['txt_dt_nasc'])       ? $_POST['txt_dt_nasc'] : "";
+      $_dt_fundacao = isset($_POST['txt_fundacao'])       ? $_POST['txt_fundacao'] : "";
+      $_email         = isset($_POST['txt_email'])         ? $_POST['txt_email']         : "";
+      $_pessoa        = isset($_POST['rdb_pessoa'])         ? $_POST['rdb_pessoa']         : "";
+
+      if($_pessoa == 'PF') {
+
+      	$_cpf_cnpj = $_cpf;
+      	$_data = $_dt_nascimento;
+
+      }elseif ($_pessoa == 'PJ') {
+
+      		$_cpf_cnpj = $_cnpj;
+      		$_data = $_dt_fundacao;
+      }
+
+
+      if($_enviar){
+
+        if($_cliente->Alterar($_id_cliente,
+          				$_pessoa,
+          				$_nome,
+          				$_cpf_cnpj,
+          				$_ci,
+          				$_endereco,
+          				$_bairro,
+          				$_cidade,
+          				$_estado,
+          				$_cep,
+          				$_responsavel,
+          				$_tel1,
+          				$_tel2,
+          				$_tel3,
+          				$_dataClass->dataForm($_data),
+          				$_email)){
+				
+                              	print "ALteração Realizada Con Sucesso !";
+
+                              	print "<a class='btn' href='../secao.php?secao=cliente&acao=cadastrar'>Voltar</a>";
+
+      }
+    }
+?>
