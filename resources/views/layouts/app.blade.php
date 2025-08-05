@@ -55,6 +55,7 @@
     <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap-notify.js') }}"></script>
     <script src="{{ asset('assets/js/paper-dashboard.min.js?v=2.0.1') }}" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="{{ asset('assets/demo/demo.js') }}"></script>
 
     @stack('js') {{-- Para JavaScript específico de páginas --}}
@@ -65,6 +66,9 @@
             demo.initChartsPages();
         });
     </script>
+    @include('components.sweet-alert')
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
